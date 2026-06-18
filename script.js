@@ -1,4 +1,4 @@
-const API_KEY = "2062aefa030cf6c8d567521a0f98ef60";
+const API_KEY = "dc775e7b3c1788bb4dc97cb84c544f90";
 
 const cityInput = document.getElementById("cityInput");
 const searchBtn = document.getElementById("searchBtn");
@@ -16,6 +16,14 @@ const error =
     document.getElementById("error");
 
 searchBtn.addEventListener("click", getWeather);
+
+cityInput.addEventListener("keypress", function(event) {
+
+    if (event.key === "Enter") {
+        getWeather();
+    }
+
+});
 
 function showLoading(message) {
     loading.textContent = message;
@@ -39,7 +47,7 @@ async function getWeather() {
             throw new Error("Please enter a city.");
         }
 
-        showLoading("Loading weather...");
+        showLoading("Loading weather forecast...");
 
         const currentResponse =
             await fetch(
@@ -57,6 +65,10 @@ async function getWeather() {
             await fetch(
                 `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_KEY}&units=imperial`
             );
+
+        if (!forecastResponse.ok) {
+            throw new Error("Unable to retrieve forecast data.");
+        }
 
         const forecastData =
             await forecastResponse.json();
@@ -77,29 +89,36 @@ async function getWeather() {
 
 function displayCurrentWeather(data) {
 
+    const icon =
+        data.weather[0].icon;
+
     currentWeatherDiv.innerHTML = `
         <div class="weather-card">
+
             <h2>${data.name}</h2>
 
+            <img
+                src="https://openweathermap.org/img/wn/${icon}@2x.png"
+                alt="Weather Icon"
+                class="weather-icon"
+            >
+
             <p>
-                Temperature:
-                ${data.main.temp}°F
+                Temperature: ${data.main.temp}°F
             </p>
 
             <p>
-                Weather:
-                ${data.weather[0].description}
+                Weather: ${data.weather[0].description}
             </p>
 
             <p>
-                Humidity:
-                ${data.main.humidity}%
+                Humidity: ${data.main.humidity}%
             </p>
 
             <p>
-                Wind:
-                ${data.wind.speed} mph
+                Wind: ${data.wind.speed} mph
             </p>
+
         </div>
     `;
 }
@@ -107,22 +126,34 @@ function displayCurrentWeather(data) {
 function displayForecast(data) {
 
     forecastDiv.innerHTML =
-        "<h2>5-Day Forecast</h2>";
+        "<h2>5-Day Forecast</h2><div class='forecast-container'></div>";
+
+    const forecastContainer =
+        document.querySelector(".forecast-container");
 
     const filteredForecast =
         data.list.filter(item =>
             item.dt_txt.includes("12:00:00")
         );
 
+    const simplifiedForecast =
+        filteredForecast.map(day => ({
+            date: day.dt_txt,
+            temp: day.main.temp,
+            description: day.weather[0].description
+        }));
+
     renderForecastRecursive(
-        filteredForecast,
-        0
+        simplifiedForecast,
+        0,
+        forecastContainer
     );
 }
 
 function renderForecastRecursive(
     forecastArray,
-    index
+    index,
+    container
 ) {
 
     if (index >= forecastArray.length) {
@@ -132,21 +163,19 @@ function renderForecastRecursive(
     const day =
         forecastArray[index];
 
-    forecastDiv.innerHTML += `
+    container.innerHTML += `
         <div class="forecast-card">
 
             <h3>
-                ${dayjs(day.dt_txt)
-                    .format("MMM D")}
+                ${dayjs(day.date).format("MMM D")}
             </h3>
 
             <p>
-                Temp:
-                ${day.main.temp}°F
+                ${day.temp}°F
             </p>
 
             <p>
-                ${day.weather[0].description}
+                ${day.description}
             </p>
 
         </div>
@@ -154,7 +183,8 @@ function renderForecastRecursive(
 
     renderForecastRecursive(
         forecastArray,
-        index + 1
+        index + 1,
+        container
     );
 }
 

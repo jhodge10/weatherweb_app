@@ -2,20 +2,29 @@ body {
     font-family: Arial, sans-serif;
     background-color: #DEDBD8;
     margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #524632;
+    color: white;
+    text-align: center;
     padding: 20px;
 }
 
 .container {
-    max-width: 800px;
-    margin: auto;
+    max-width: 900px;
+    margin: 20px auto;
     background: white;
     padding: 25px;
     border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
-h1 {
+.subtitle {
     text-align: center;
     color: #524632;
+    margin-bottom: 20px;
 }
 
 .search-section {
@@ -46,22 +55,52 @@ button:hover {
 #error {
     color: red;
     font-weight: bold;
+    text-align: center;
 }
 
 #loading {
     color: #524632;
+    text-align: center;
+    font-weight: bold;
 }
 
 .weather-card {
     background: #D8FFDD;
-    padding: 15px;
-    margin-top: 10px;
+    padding: 20px;
+    margin-top: 20px;
     border-radius: 8px;
+    text-align: center;
+}
+
+.weather-icon {
+    width: 100px;
+    display: block;
+    margin: 0 auto;
+}
+
+#forecast {
+    margin-top: 20px;
+}
+
+.forecast-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
 .forecast-card {
+    flex: 1;
+    min-width: 120px;
+    text-align: center;
     background: #C3C49E;
     padding: 12px;
-    margin-top: 10px;
     border-radius: 8px;
+}
+
+footer {
+    background-color: #524632;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    margin-top: 30px;
 }
