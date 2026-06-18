@@ -1,32 +1,24 @@
 # Overview
 
-{Important! Do not say in this section that this is college assignment. Talk about what you are trying to accomplish as a software engineer to further your learning.}
+The software contains an API key fro OpenWeather that is utalized to pull forecast information for the user based on the city that they choose to want to see the forecast for.
 
-{Provide a description of the software that you wrote to demonstrate the JavaScript language.}
-
-{Describe your purpose for writing this software.}
-
-{Provide a link to your YouTube demonstration. It should be a 4-5 minute demo of the software running and a walkthrough of the code. Focus should be on sharing what you learned about the language syntax.}
+The purpose of this software is to be able to enter the city in which you either live or are interested in and see the weather forecast for that city and the next five days predicted forecast a well.
 
 [Software Demo Video](http://youtube.link.goes.here)
 
 # Development Environment
 
-{Describe the tools that you used to develop the software}
+The tools used in this project were VS Code and OpenWeather. OpenWeather is the Weather website where the API key was created and added to the JS of the project.
 
-{Describe the programming language that you used and any libraries.}
+The languages used for this project are html, css, and JavaScript(JS).
 
 # Useful Websites
 
-{Make a list of websites that you found helpful in this project}
-
-- [Web Site Name](http://url.link.goes.here)
-- [Web Site Name](http://url.link.goes.here)
+- [W3 Schools](https://www.w3schools.com/js/)
+- [OpenWeather](https://openweathermap.org/)
 
 # Future Work
 
-{Make a list of things that you need to fix, improve, and add in the future.}
-
-- Item 1
-- Item 2
-- Item 3
+- I want to add the ability to change the states that you focus towards. There are many cities with the same name but are in different states.
+- I want to add more information to the webb app wih more information about how the app works with an information page added to the app.
+- I want to add life to the web app. There to be pictures of the citires when you search them or pictures of the type of weather there rather than an icon.
